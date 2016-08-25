@@ -10,6 +10,9 @@ import './my_shows.html';
 
 import { Shows } from '/imports/api/shows/shows.js';
 
+
+//you can only subscribe to what's being published.
+//currently, the only thing being published is user specific shows!
 Template.body.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('shows');
@@ -18,7 +21,7 @@ Template.body.onCreated(function bodyOnCreated() {
 Template.myShows.helpers({
   arrayOfShows: function(){
     return Shows.find({}).fetch();
-  }
+  },
 });
 
 Template.myShows.events({
@@ -45,8 +48,6 @@ Template.myShows.events({
     const episode=$('#' + this._id + "episode").val();
 
 
-
-
     var info = {'title' : showName,
                 'season' : season,
                 'episode' : episode,};
@@ -57,10 +58,12 @@ Template.myShows.events({
       if( result == true)
       {
         $('#' + this._id + "message").show();
+        event.preventDefault();
       }
       else {
 
         $('#' + this._id + "error").show();
+        event.preventDefault();
 
       }
     });

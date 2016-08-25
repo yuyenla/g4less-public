@@ -9,11 +9,17 @@ Meteor.methods({
     check(showId, String);
 
 
-    const show = Shows.findOne(showId);
+    
     if (! this.userId) {
       throw new Meteor.Error('not-authorized');
     }
 
+    //checks to see if that show exists and belongs to you
+    const show = Shows.findOne({_id:showId, owner: this.userId});
+    if (!show) {
+      throw new Meteor.Error('not-authorized 2');
+      console.log("false");
+    }
     Shows.remove(showId);
   },
 
