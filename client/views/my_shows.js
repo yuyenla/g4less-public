@@ -26,7 +26,11 @@ Template.myShows.helpers({
 
 Template.myShows.events({
   'click .delete'() {
-    Meteor.call('shows.remove', this._id);
+    Meteor.call('shows.remove', this._id, function(error, result) {
+      if (result == true){
+        $('.deleteMessage').show().delay(3000).hide(0);
+      }
+    });
   },
   'click .updateCheckBox'() {
     $('#' + this._id + "checkBox").hide();
@@ -52,19 +56,13 @@ Template.myShows.events({
                 'season' : season,
                 'episode' : episode,};
 
-    console.log("info", info);
     Meteor.call('shows.update', info, this._id, function(error, result) {
-      console.log(result);
-      if( result == true)
+      if(result)
       {
-        $('#' + this._id + "message").show();
-        event.preventDefault();
+        $('#' + result + "message").show();
       }
-      else {
-
-        $('#' + this._id + "error").show();
-        event.preventDefault();
-
+      else if (error){
+        $('#' + result + "error").show();
       }
     });
 

@@ -9,7 +9,7 @@ Meteor.methods({
     check(showId, String);
 
 
-    
+
     if (! this.userId) {
       throw new Meteor.Error('not-authorized');
     }
@@ -21,6 +21,7 @@ Meteor.methods({
       console.log("false");
     }
     Shows.remove(showId);
+    return true;
   },
 
 });
