@@ -28,7 +28,7 @@ Template.myShows.events({
   'click .delete'() {
     Meteor.call('shows.remove', this._id, function(error, result) {
       if (result == true){
-        $('.deleteMessage').show().delay(3000).hide(0);
+        $('.deleteMessage').show().delay(1000).hide(0);
       }
     });
   },

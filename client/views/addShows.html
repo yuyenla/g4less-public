@@ -7,9 +7,22 @@
           <div class="form-group">
             <label class="control-label col-sm-2" type="text" name="title">Title:</label>
               <div class="col-sm-10">
-                <input type="text" class="show-name" id="title" placeholder="Enter title to search by">
+                <input type="text" class="show-name" id="title" name="query" placeholder="Enter title to search by">
               </div>
           </div>
+
+          {{#if searching}}
+            <p>Searching...</p>
+            {{else}}
+              {{#if shows.count}}
+                <hr>
+                <table>
+                  {{#each shows}}
+                    {{> foundShows}}
+                    {{/each}}
+                </table>
+              {{/if}}
+          {{/if}}
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="season">Season:</label>
@@ -51,4 +64,14 @@
     </div>
   </div>
 </div>
+</template>
+
+<template name="foundShows">
+  <tr>
+    <td class="image"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{thumb}}"></td>
+    <td>
+      <a href="{{link}}" target="_blank">{{title}}</a>
+      <p>{{{snippet}}}</p>
+    </td>
+  </tr>
 </template>
