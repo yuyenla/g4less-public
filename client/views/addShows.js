@@ -6,6 +6,7 @@ import {Shows} from '/imports/api/shows/shows.js';
 import './addShows.html';
 
 
+
 Session.setDefault('searching', false);
 
 Tracker.autorun(function() {
@@ -13,7 +14,7 @@ Tracker.autorun(function() {
   if (typeof(Session.get('query')) != "undefined") {
     console.log("session.getQuery", Session.get('query'));
     var searchHandle = Meteor.subscribe('shows', Session.get('query'));
-    Session.set('searching', ! searchHandle.ready());
+    Session.set('searching', !searchHandle.ready());
   }
 });
 
@@ -25,7 +26,17 @@ Template.addShows.events({
     if (query){
       Session.set('query', query);
     }
-  }
+  },
+  'keydown .typeahead' : function(event,template) {
+    var query = template.$('input[type=text]').val();
+    if(query.length >= 3){
+      setTimeout(function() {
+        console.log("query length", query.length);
+        Session.set('query', query);
+      }, 1000);
+
+    }
+  },
 });
 
 Template.addShows.helpers({
@@ -37,7 +48,6 @@ Template.addShows.helpers({
     return Session.get('searching');
   }
 });
-
 
 
 

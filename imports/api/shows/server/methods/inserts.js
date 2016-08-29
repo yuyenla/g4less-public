@@ -5,6 +5,7 @@ import { check } from 'meteor/check';
 
 import { Shows } from '/imports/api/shows/shows.js';
 
+
 Meteor.methods({
   'shows.insert'(info) {
     check(info, Object);
@@ -16,8 +17,11 @@ Meteor.methods({
 
     Shows.insert({
       title: info.title,
+      episode: info.episode,
       season: info.season,
-      episode : info.episode,
+      thumb: info.thumb,
+      snippet: info.snippet,
+      link: info.link,
       createdAt: new Date(),
       owner: this.userId,
       username: Meteor.users.findOne(this.userId).user_name,
