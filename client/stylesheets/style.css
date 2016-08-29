@@ -504,7 +504,7 @@ footer h4 {
 }
 
 .addShows-container{
-	padding:15px 50px 15px 30px;
+	padding:15px 50px 15px 50px;
 }
 
 
@@ -615,5 +615,14 @@ header {
 }
 
 .custom-search-input .glyphicon-search{
-    font-size: 23px;
+    font-size: 15px;
+}
+
+.form-center {
+	margin: 0 auto;
+}
+
+.showResult {
+	display: none;
+	color:red;
 }

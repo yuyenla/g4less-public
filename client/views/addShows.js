@@ -27,7 +27,7 @@ Template.addShows.events({
       Session.set('query', query);
     }
   },
-  'keydown .typeahead' : function(event,template) {
+  'keydown .form-control' : function(event,template) {
     var query = template.$('input[type=text]').val();
     if(query.length >= 3){
       setTimeout(function() {

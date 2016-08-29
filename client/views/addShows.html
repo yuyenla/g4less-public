@@ -1,13 +1,3 @@
-<template name="demo">
-
-<div id="scrollable-dropdown-menu">
-  <input class="form-control typeahead" name="team" type="text"
-       placeholder="NBA teams"
-       autocomplete="off" spellcheck="off"
-       data-source="nba"/>
-     </div>
-</template>
-
 <template name="addShows">
 <div class="addShows">
     <div class="addShows-container">
@@ -15,19 +5,41 @@
         <h1>add shows</h1>
         <form class="form-horizontal">
           <div class="form-group">
-            <label class="control-label col-sm-2" type="text" name="title">Title:</label>
-              <div class=" scrollable-dropdown-menu col-sm-10">
-                <input type="text" class="typeahead" id="title" name="query" list="shows" placeholder="Enter title to search by">
+              <div class="input-group col-md-8">
+                <input type="text" class="form-control input-lg" id="title" name="query" list="shows" placeholder="Enter title to search by">
                 <div class="faketypeahead col-sm-10">
                   <datalist id="shows">
-                    <option value="suits">suits</option>
                   {{#each shows}}
-                    {{> foundShows}}
+                    {{> titles}}
                   {{/each}}
                 </datalist>
                 </div>
+                <span class="input-group-btn">
+                  <button class="btn btn-info btn-lg" type="button">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </span>
               </div>
           </div>
+        </form>
+        <div class="showResult">
+        {{#if searching}}
+          <p>Searching...</p>
+          {{else}}
+            {{#if shows.count}}
+              <hr>
+              <table>
+                {{#each shows}}
+                  {{> foundShows}}
+                {{/each}}
+              </table>
+            {{/if}}
+        {{/if}}
+      </div>
+      </div>
+    </div>
+  </div>
+</template>
 <!--
           {{#if searching}}
             <p>Searching...</p>
@@ -40,7 +52,7 @@
                   {{/each}}
                 </table>
               {{/if}}
-          {{/if}} -->
+          {{/if}}
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="season">Season:</label>
@@ -82,9 +94,9 @@
     </div>
   </div>
 </div>
-</template>
+</template> -->
 
-<!--<template name="foundShows">
+<template name="foundShows">
   <tr>
     <td class="image"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{thumb}}"></td>
     <td>
@@ -92,8 +104,8 @@
       <p>{{snippet}}</p>
     </td>
   </tr>
-</template> -->
+</template>
 
-<template name="foundShows">
+<template name="titles">
 <option value="{{title}}">{{title}}</option>
 </template>
