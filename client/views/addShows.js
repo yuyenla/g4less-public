@@ -10,29 +10,35 @@ import './addShows.html';
 Session.setDefault('searching', false);
 
 Tracker.autorun(function() {
-  console.log("before if: ", Session.get('query'));
+  //console.log("before if: ", Session.get('title'));
+  if (typeof(Session.get('title')) != "undefined") {
+    console.log("session.getTitle", Session.get('title'));
+    var searchHandle = Meteor.subscribe('titles', Session.get('title'));
+    Session.set('searching', !searchHandle.ready());
+  }
   if (typeof(Session.get('query')) != "undefined") {
     console.log("session.getQuery", Session.get('query'));
-    var searchHandle = Meteor.subscribe('shows', Session.get('query'));
+    var searchHandle = Meteor.subscribe('showReturn', Session.get('query'));
     Session.set('searching', !searchHandle.ready());
   }
 });
 
 Template.addShows.events({
-  'submit form': function(event, template) {
+  'submit .form-horizontal': function(event, template) {
     event.preventDefault();
     var query = template.$('input[type=text]').val();
     console.log("query", query);
     if (query){
       Session.set('query', query);
     }
+    $('.showResult').show();
   },
   'keydown .form-control' : function(event,template) {
-    var query = template.$('input[type=text]').val();
-    if(query.length >= 3){
+    var title = template.$('input[type=text]').val();
+    if(title.length >= 3){
       setTimeout(function() {
-        console.log("query length", query.length);
-        Session.set('query', query);
+        console.log("title length", title.length);
+        Session.set('title', title);
       }, 1000);
 
     }
@@ -48,6 +54,8 @@ Template.addShows.helpers({
     return Session.get('searching');
   }
 });
+
+
 
 
 
