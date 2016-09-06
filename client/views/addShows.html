@@ -1,16 +1,58 @@
 <template name="addShows">
-  <div class="addShows">
+<div class="addShows">
     <div class="addShows-container">
       <div class="text-center">
         <h1>add shows</h1>
         <form class="form-horizontal">
           <div class="form-group">
-            <label class="control-label col-sm-2" type="text" name="title">Title:</label>
-              <div class="col-sm-10">
-                <input type="text" class="show-name" id="title" placeholder="Enter title to search by">
+              <div class="input-group col-md-8">
+                <input type="text" class="form-control input-lg" id="title" name="query" list="shows" placeholder="Enter title to search by">
+                <div class="faketypeahead col-sm-10">
+                  <datalist id="shows">
+                  {{#each title}}
+                    {{> titles}} title
+                  {{/each}}
+                </datalist>
+                </div>
+                <span class="input-group-btn">
+                  <button class="btn btn-info btn-lg" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </span>
               </div>
           </div>
-
+        </form>
+        <div class="showResult">
+        {{#if searching}}
+          <p>Searching...</p>
+          {{else}}
+            {{#if shows.count}}
+              <hr>
+              <table>
+                {{#each shows}}
+                  {{> foundShows}}
+                {{/each}}
+              </table>
+            {{/if}}
+        {{/if}}
+      </div>
+      </div>
+    </div>
+  </div>
+</template>
+<!--
+          {{#if searching}}
+            <p>Searching...</p>
+            {{else}}
+              {{#if shows.count}}
+                <hr>
+                <table>
+                  {{#each shows}}
+                    {{> foundShows}}
+                  {{/each}}
+                </table>
+              {{/if}}
+          {{/if}}
           <div class="form-group">
             <label class="control-label col-sm-2" for="season">Season:</label>
               <div class="col-sm-10">
@@ -23,7 +65,6 @@
                 </select>
               </div>
           </div>
-
           <div class="form-group">
             <label class="control-label col-sm-2" for="season">Episode:</label>
               <div class="col-sm-10">
@@ -44,11 +85,24 @@
       </div>
     </div>
   </form>
-
     <div class="message">
       Success!
     </div>
     </div>
   </div>
 </div>
+</template> -->
+
+<template name="foundShows">
+  <tr>
+    <td class="image"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{thumb}}"></td>
+    <td>
+      <a href="https://www.themoviedb.org/tv/{{link}}" target="_blank">{{title}}</a> i'm here
+      <p>{{snippet}}</p>
+    </td>
+  </tr>
+</template>
+
+<template name="titles">
+<option id="showid" value="{{show_id + '-' + title}}">{{title}}</option>
 </template>

@@ -22,7 +22,7 @@ Meteor.methods({
 
     console.log("new info:", newInfo); //need to be owner in order to update it
     Shows.update({_id: showId, owner: this.userId}, {$set: newInfo});
-    return true;
+    return showId;
 
   },
 

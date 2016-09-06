@@ -10,6 +10,9 @@ import './my_shows.html';
 
 import { Shows } from '/imports/api/shows/shows.js';
 
+
+//you can only subscribe to what's being published.
+//currently, the only thing being published is user specific shows!
 Template.body.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
   Meteor.subscribe('shows');
@@ -18,12 +21,16 @@ Template.body.onCreated(function bodyOnCreated() {
 Template.myShows.helpers({
   arrayOfShows: function(){
     return Shows.find({}).fetch();
-  }
+  },
 });
 
 Template.myShows.events({
   'click .delete'() {
-    Meteor.call('shows.remove', this._id);
+    Meteor.call('shows.remove', this._id, function(error, result) {
+      if (result == true){
+        $('.deleteMessage').show().delay(1000).hide(0);
+      }
+    });
   },
   'click .updateCheckBox'() {
     $('#' + this._id + "checkBox").hide();
@@ -45,23 +52,17 @@ Template.myShows.events({
     const episode=$('#' + this._id + "episode").val();
 
 
-
-
     var info = {'title' : showName,
                 'season' : season,
                 'episode' : episode,};
 
-    console.log("info", info);
     Meteor.call('shows.update', info, this._id, function(error, result) {
-      console.log(result);
-      if( result == true)
+      if(result)
       {
-        $('#' + this._id + "message").show();
+        $('#' + result + "message").show();
       }
-      else {
-
-        $('#' + this._id + "error").show();
-
+      else if (error){
+        $('#' + result + "error").show();
       }
     });
 
