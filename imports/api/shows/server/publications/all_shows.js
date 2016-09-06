@@ -11,8 +11,6 @@ Meteor.publish('showReturn', function(show){
     });
 
   //  var id = response.data.results[0].id;
-  //  var showId = HTTP.get('http://api.themoviedb.org/3/tv/' + id + '&api_key=750bf13867ffdeadf92768f357cea8c0', {
-  //});
 
   _.each(response.data.results, function(item) {
     var doc = {
@@ -20,11 +18,15 @@ Meteor.publish('showReturn', function(show){
       title: item.name,
       show_id: item.id,
       link: item.id + encodeURI(show),
-      snippet: item.overview
+      snippet: item.overview,
+      category: show
     };
-    console.log("doc", doc);
+  //  console.log("doc", doc);
       self.added('shows', Random.id(), doc);
+      // var showId = Shows.insert(doc);
+      // Session.set('showId',showId);
     });
+
 
 
     self.ready();
@@ -51,10 +53,13 @@ Meteor.publish('titles', function(title) {
       var doc = {
       //  thumb: item.poster_path,
         title: item.name,
-      //  show_id: item.id,
+        category: title,
+        show_id: item.id
       //  link: item.id + encodeURI(query),
       //  snippet: item.overview
       };
+
+
 
       //console.log("doc: ", doc);
       //upsert = update or insert

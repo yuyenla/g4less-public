@@ -26,12 +26,22 @@ Tracker.autorun(function() {
 Template.addShows.events({
   'submit .form-horizontal': function(event, template) {
     event.preventDefault();
-    var query = template.$('input[type=text]').val();
-    console.log("query", query);
-    if (query){
-      Session.set('query', query);
-    }
-    $('.showResult').show();
+    //var query = template.$('input[type=text]').val();
+    var e = $('#showid');
+    //var strUser = e.options[e.selectedIndex].value;
+
+
+    console.log("SHOW ID", e.val());
+    //var shows = $("#selectedShow").val();
+
+  //  var text = target.text.value;
+  //  console.log("SHOWS", query);
+  //  Meteor.call(shows.insertTitle, query);
+  //  console.log("query", query);
+    // if (query){
+    //   Session.set('query', query);
+    // }
+  //  $('.showResult').show();
   },
   'keydown .form-control' : function(event,template) {
     var title = template.$('input[type=text]').val();
@@ -47,7 +57,14 @@ Template.addShows.events({
 
 Template.addShows.helpers({
   shows: function() {
-    console.log("shows.find.fetch" , Shows.find().fetch());
+  //  console.log("shows.find.fetch" , Shows.find().fetch());
+    //return Shows.findOne({}, {snippet:1});
+    //return Shows.find({'category':'show'});
+    console.log("session get showId",Session.get('showId') )
+    return Shows.find({_id:Session.get('showId')});
+  },
+  title: function() {
+//    console.log("shows.find.fetch" , Shows.find().fetch());
     return Shows.find();
   },
   searching: function() {
@@ -64,15 +81,12 @@ Template.addShows.events({
   'submit .form-horizontal'(event) {
     // Prevent default browser form submit
     event.preventDefault();
-
     var query = $('input[type=text]').val();
     console.log("getting the value of query on client side ", query)
-
     Meteor.call("getShowsAPI", query, function(error, result){
       if(error){
         console.log("error", error);
       }
-
       if(result){
         console.log("result", result);
       }
@@ -83,16 +97,12 @@ Template.addShows.events({
     const showName = $('#title').val();
     const season=$('#season').val();
     const episode=$('#episode').val();
-
     console.log("title: ", showName);
     console.log("season: ", season);
     console.log("episode: ", episode);
-
-
     var info = {'title' : showName,
                 'season' : season,
                 'episode' : episode,};
-
     Meteor.call('shows.insert', info, function(error, result) {
       console.log(result);
       if( result == true)
@@ -100,7 +110,5 @@ Template.addShows.events({
         $('.message').show();
       }
     });
-
-
   },*/
 //});
