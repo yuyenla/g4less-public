@@ -39,7 +39,18 @@ Meteor.publish('shows', function(query) {
       }*/
 
       //self.added('shows', Random.id(), doc);
-      Shows.insert(doc);
+      //Shows.insert(doc);
+        Shows.upsert({
+          show_id: doc.show_id},
+          {
+            $setOnInsert: {
+            thumb: doc.thumb,
+            title: doc.title,
+            show_id: doc.show_id,
+            //link: doc.id + encodeURI(title),
+            snippet: doc.snippet
+          },
+      });
     });
 
 
