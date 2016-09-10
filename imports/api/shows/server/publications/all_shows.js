@@ -22,14 +22,14 @@ Meteor.publish('shows', function(query) {
 
     _.each(response.data.results, function(item) {
       var doc = {
-        //thumb: item.poster_path,
+        thumb: item.poster_path,
         title: item.name,
-        //show_id: item.id,
+        show_id: item.id,
         //link: item.id + encodeURI(query),
-        //snippet: item.overview
+        snippet: item.overview
       };
 
-      console.log("doc: ", doc);
+      console.log("doc: ", doc.title);
       //upsert = update or insert
     /*  var shows = Shows.findOne({title: item.name});
       console.log("shows",shows);
@@ -38,7 +38,8 @@ Meteor.publish('shows', function(query) {
         console.log("Shows.insert", item.name);
       }*/
 
-      self.added('shows', Random.id(), doc);
+      //self.added('shows', Random.id(), doc);
+      Shows.insert(doc);
     });
 
 
@@ -47,6 +48,7 @@ Meteor.publish('shows', function(query) {
   } catch(error) {
     console.log(error);
   }
+  return Shows.find();
 });
 
 /*Meteor.methods({

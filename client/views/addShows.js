@@ -41,7 +41,7 @@ Template.addShows.events({
 
 Template.addShows.helpers({
   shows: function() {
-    console.log("shows.find.fetch" , Shows.find().fetch());
+    console.log("shows.find.fetch" , Session.get('query'));
     return Shows.find();
   },
   searching: function() {
