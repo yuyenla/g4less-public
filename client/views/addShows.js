@@ -5,48 +5,75 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import {Shows} from '/imports/api/shows/shows.js';
 import './addShows.html';
 
-
+var showTitle='';
 
 Session.setDefault('searching', false);
 
 Tracker.autorun(function() {
-  console.log("before if: ", Session.get('query'));
+  //console.log("before if: ", Session.get('query'));
   if (typeof(Session.get('query')) != "undefined") {
-    console.log("session.getQuery", Session.get('query'));
+    //console.log("session.getQuery", Session.get('query'));
     var searchHandle = Meteor.subscribe('shows', Session.get('query'));
     Session.set('searching', !searchHandle.ready());
   }
+  if (typeof(Session.get('title')) != "undefined") {
+    var searchHandle = Meteor.subscribe('showReturn', Session.get('title'));
+    Session.set('searching', !searchHandle.ready());
+  }
+});
+
+Template.addShows.onRendered(function(){
+  $('.ui.dropdown').dropdown();
+  $('.dropdown').dropdown();
+  $('#search-select').dropdown();
 });
 
 Template.addShows.events({
   'submit form': function(event, template) {
     event.preventDefault();
-    var query = template.$('input[type=text]').val();
-    console.log("query", query);
-    if (query){
-      Session.set('query', query);
-    }
+    var queryId = $('#showid').attr("class");
+    console.log("queryId", queryId);
+     if (queryId){
+       Session.set('queryId', queryId);
+       $('.showResult').show();
+     }
   },
   'keydown .form-control' : function(event,template) {
     var query = template.$('input[type=text]').val();
     if(query.length >= 3){
       setTimeout(function() {
-        console.log("query length", query.length);
+        //console.log("query length", query.length);
         Session.set('query', query);
       }, 1000);
 
     }
   },
+
+  'click .item' : function(event, template) {
+    showTitle = $('.selected').attr('data-value');
+    Session.set('title', showTitle);
+    console.log("here is the showTitle!", Session.get('title'));
+
+  }
 });
 
 Template.addShows.helpers({
   shows: function() {
-    console.log("shows.find.fetch" , Session.get('query'));
+    console.log("i made it here");
+    console.log("show title",showTitle);
     return Shows.find();
   },
   searching: function() {
     return Session.get('searching');
   }
+});
+
+Template.foundShows.helpers({
+  show: function() {
+    console.log("i made it here");
+    console.log("show title",showTitle);
+    return Shows.find({title: Session.get('title')});
+  },
 });
 
 

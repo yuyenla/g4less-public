@@ -3,42 +3,32 @@
     <div class="addShows-container">
       <div class="text-center">
         <h1>add shows</h1>
-        <form class="form-horizontal">
-          <div class="form-group">
-              <div class="input-group col-md-8">
-                <input type="text" class="form-control input-lg" id="title" name="query" list="shows" placeholder="Enter title to search by">
-                <div class="faketypeahead col-sm-10">
-                  <datalist id="shows">
-                  {{#each shows}}
-                    {{> titles}}
-                  {{/each}}
-                </datalist>
-                </div>
-                <span class="input-group-btn">
-                  <button class="btn btn-info btn-lg" type="button">
-                    <i class="glyphicon glyphicon-search"></i>
-                  </button>
-                </span>
-              </div>
-          </div>
-        </form>
-        <div class="showResult">
-        {{#if searching}}
-          <p>Searching...</p>
-          {{else}}
-            {{#if shows.count}}
-              <hr>
-              <table>
-                {{#each shows}}
-                  {{> foundShows}}
-                {{/each}}
-              </table>
-            {{/if}}
-        {{/if}}
+        <div class="ui dropdown">
+          <input type="hidden" name="gender" class="form-control input-lg">
+        </div>
+
+        <div>
+          <select class="ui search selection dropdown " id="search-select">
+            <option value="">Please enter a title to search by</option>
+            <!-- <option value="2">2</option>
+            <option value="23">23</option>
+            <option value="4">4</option> -->
+
+            {{#each shows}}
+              {{>title}}
+            {{/each}}
+
+
+        </select>
+
       </div>
-      </div>
-    </div>
-  </div>
+
+
+        {{> foundShows}}
+
+     </div> <!--text center -->
+   </div> <!-- addShows-container-->
+    </div> <!-- addShows-->
 </template>
 <!--
           {{#if searching}}
@@ -97,15 +87,23 @@
 </template> -->
 
 <template name="foundShows">
-  <tr>
-    <td class="image"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{thumb}}"></td>
-    <td>
-      <a href="https://www.themoviedb.org/tv/{{link}}" target="_blank">{{title}}</a>
-      <p>{{snippet}}</p>
-    </td>
-  </tr>
+  {{#each show}}
+  <thead>
+    <tr>
+      <th>
+        <a href="https://www.themoviedb.org/tv/{{show.link}}" target="_blank">{{title}}</a>
+      </th>
+    </tr>
+    <tr>
+      <td class="image"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{thumb}}"></td>
+      <td>
+        <p>{{snippet}}</p>
+      </td>
+    </tr>
+  </thead>
+  {{/each}}
 </template>
 
-<template name="titles">
-<option value="{{title}}">{{title}}</option>
+<template name="title">
+  <option id="showid" class="{{show_id}}" value="{{title}}"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{thumb}}" height="50" width="40">{{title}}</option>
 </template>

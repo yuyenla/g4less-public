@@ -40,6 +40,19 @@ FlowRouter.route('/addShows', {
   }
 });
 
+FlowRouter.route('/instagram', {
+  name: "instagram",
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  action: function(params, queryParams) {
+    BlazeLayout.render('masterLayout', {
+      footer: "footer",
+      main: "instagram",
+      nav: "nav",
+      header: "header",
+    });
+  }
+});
+
 FlowRouter.route('/my_shows', {
   name: "myShows",
   triggersEnter: [AccountsTemplates.ensureSignedIn],

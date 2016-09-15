@@ -3,10 +3,11 @@ import { Mongo } from 'meteor/mongo';
 import {Shows} from '/imports/api/shows/shows.js';
 
 
-/*Meteor.publish('seasons', function(season){
-  var showId = HTTP.get('http://api.themoviedb.org/3/tv/' + id + '&api_key=750bf13867ffdeadf92768f357cea8c0', {
-  });
-});*/
+Meteor.publish('showReturn', function(showTitle){
+  console.log("Here is the showID: ", showTitle)
+  console.log("publications", Shows.findOne({title:showTitle}));
+  return Shows.find({title:showTitle});
+});
 
 
 Meteor.publish('shows', function(query) {
@@ -29,7 +30,7 @@ Meteor.publish('shows', function(query) {
         snippet: item.overview
       };
 
-      console.log("doc: ", doc.title);
+      //console.log("doc: ", doc.title);
       //upsert = update or insert
     /*  var shows = Shows.findOne({title: item.name});
       console.log("shows",shows);
