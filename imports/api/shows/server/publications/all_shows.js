@@ -18,7 +18,7 @@ Meteor.publish('shows', function(query) {
     });
 
     //var id = response.data.results[0].id;
-    //console.log("id", id);
+    //console.log("RESPONSE", response.data);
 
 
     _.each(response.data.results, function(item) {

@@ -614,3 +614,7 @@ header {
 	display:none;
 	color:red;
 }
+
+.form-control {
+	width:300px;
+}

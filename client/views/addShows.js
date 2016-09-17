@@ -29,15 +29,15 @@ Template.addShows.onRendered(function(){
 });
 
 Template.addShows.events({
-  'submit form': function(event, template) {
-    event.preventDefault();
-    var queryId = $('#showid').attr("class");
-    console.log("queryId", queryId);
-     if (queryId){
-       Session.set('queryId', queryId);
-       $('.showResult').show();
-     }
-  },
+  // 'submit form': function(event, template) {
+  //   event.preventDefault();
+  //   var queryId = $('#showid').attr("class");
+  //   console.log("queryId", queryId);
+  //    if (queryId){
+  //      Session.set('queryId', queryId);
+  //      $('.showResult').show();
+  //    }
+  // },
   'keydown .form-control' : function(event,template) {
     var query = template.$('input[type=text]').val();
     if(query.length >= 3){

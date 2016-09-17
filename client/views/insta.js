@@ -11,7 +11,7 @@ Tracker.autorun(function() {
 });
 
 Template.instagram.helpers({
-  posts: function() {
+  post: function() {
     return Insta.find();
   }
 });

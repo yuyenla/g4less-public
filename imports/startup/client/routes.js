@@ -9,7 +9,7 @@ FlowRouter.route('/', {
       footer: "footer",
       main: "home",
       nav: "nav",
-      header: "header",
+      //header: "header",
     });
   }
 });
@@ -22,7 +22,7 @@ FlowRouter.route('/private', {
       footer: "footer",
       main: "private",
       nav: "nav",
-      header: "header",
+      //header: "header",
     });
   }
 });
@@ -35,7 +35,7 @@ FlowRouter.route('/addShows', {
       footer: "footer",
       main: "addShows",
       nav: "nav",
-      header: "header",
+      //header: "header",
     });
   }
 });
@@ -48,7 +48,7 @@ FlowRouter.route('/instagram', {
       footer: "footer",
       main: "instagram",
       nav: "nav",
-      header: "header",
+      //header: "header",
     });
   }
 });
@@ -61,7 +61,7 @@ FlowRouter.route('/my_shows', {
       footer: "footer",
       main: "myShows",
       nav: "nav",
-      header: "header",
+      //header: "header",
     });
   }
 });
