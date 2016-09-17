@@ -5,11 +5,12 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import {Shows} from '/imports/api/shows/shows.js';
 import './addShows.html';
 
-
+var showTitle='';
 
 Session.setDefault('searching', false);
 
 Tracker.autorun(function() {
+<<<<<<< HEAD
   //console.log("before if: ", Session.get('title'));
   if (typeof(Session.get('title')) != "undefined") {
     console.log("session.getTitle", Session.get('title'));
@@ -19,11 +20,28 @@ Tracker.autorun(function() {
   if (typeof(Session.get('query')) != "undefined") {
     console.log("session.getQuery", Session.get('query'));
     var searchHandle = Meteor.subscribe('showReturn', Session.get('query'));
+=======
+  //console.log("before if: ", Session.get('query'));
+  if (typeof(Session.get('query')) != "undefined") {
+    //console.log("session.getQuery", Session.get('query'));
+    var searchHandle = Meteor.subscribe('shows', Session.get('query'));
+>>>>>>> instagram
+    Session.set('searching', !searchHandle.ready());
+  }
+  if (typeof(Session.get('title')) != "undefined") {
+    var searchHandle = Meteor.subscribe('showReturn', Session.get('title'));
     Session.set('searching', !searchHandle.ready());
   }
 });
 
+Template.addShows.onRendered(function(){
+  $('.ui.dropdown').dropdown();
+  $('.dropdown').dropdown();
+  $('#search-select').dropdown();
+});
+
 Template.addShows.events({
+<<<<<<< HEAD
   'submit .form-horizontal': function(event, template) {
     event.preventDefault();
     //var query = template.$('input[type=text]').val();
@@ -43,20 +61,44 @@ Template.addShows.events({
     // }
   //  $('.showResult').show();
   },
+=======
+  // 'submit form': function(event, template) {
+  //   event.preventDefault();
+  //   var queryId = $('#showid').attr("class");
+  //   console.log("queryId", queryId);
+  //    if (queryId){
+  //      Session.set('queryId', queryId);
+  //      $('.showResult').show();
+  //    }
+  // },
+>>>>>>> instagram
   'keydown .form-control' : function(event,template) {
     var title = template.$('input[type=text]').val();
     if(title.length >= 3){
       setTimeout(function() {
+<<<<<<< HEAD
         console.log("title length", title.length);
         Session.set('title', title);
+=======
+        //console.log("query length", query.length);
+        Session.set('query', query);
+>>>>>>> instagram
       }, 1000);
 
     }
   },
+
+  'click .item' : function(event, template) {
+    showTitle = $('.selected').attr('data-value');
+    Session.set('title', showTitle);
+    console.log("here is the showTitle!", Session.get('title'));
+
+  }
 });
 
 Template.addShows.helpers({
   shows: function() {
+<<<<<<< HEAD
   //  console.log("shows.find.fetch" , Shows.find().fetch());
     //return Shows.findOne({}, {snippet:1});
     //return Shows.find({'category':'show'});
@@ -65,11 +107,23 @@ Template.addShows.helpers({
   },
   title: function() {
 //    console.log("shows.find.fetch" , Shows.find().fetch());
+=======
+    console.log("i made it here");
+    console.log("show title",showTitle);
+>>>>>>> instagram
     return Shows.find();
   },
   searching: function() {
     return Session.get('searching');
   }
+});
+
+Template.foundShows.helpers({
+  show: function() {
+    console.log("i made it here");
+    console.log("show title",showTitle);
+    return Shows.find({title: Session.get('title')});
+  },
 });
 
 

@@ -3,6 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import {Shows} from '/imports/api/shows/shows.js';
 
 
+<<<<<<< HEAD
 Meteor.publish('showReturn', function(show){
   console.log("show on server side", show);
   var self = this;
@@ -30,6 +31,13 @@ Meteor.publish('showReturn', function(show){
 
 
     self.ready();
+=======
+Meteor.publish('showReturn', function(showTitle){
+  console.log("Here is the showID: ", showTitle)
+  console.log("publications", Shows.findOne({title:showTitle}));
+  return Shows.find({title:showTitle});
+});
+>>>>>>> instagram
 
   } catch(error) {
     console.log(error);
@@ -46,11 +54,12 @@ Meteor.publish('titles', function(title) {
     });
 
     //var id = response.data.results[0].id;
-    //console.log("id", id);
+    //console.log("RESPONSE", response.data);
 
 
     _.each(response.data.results, function(item) {
       var doc = {
+<<<<<<< HEAD
       //  thumb: item.poster_path,
         title: item.name,
         category: title,
@@ -62,6 +71,16 @@ Meteor.publish('titles', function(title) {
 
 
       //console.log("doc: ", doc);
+=======
+        thumb: item.poster_path,
+        title: item.name,
+        show_id: item.id,
+        //link: item.id + encodeURI(query),
+        snippet: item.overview
+      };
+
+      //console.log("doc: ", doc.title);
+>>>>>>> instagram
       //upsert = update or insert
       // var shows = Shows.findOne({title: item.name});
       // //console.log("shows",shows);
@@ -70,7 +89,19 @@ Meteor.publish('titles', function(title) {
       //   console.log("Shows.insert", item.name);
       // }
 
-      self.added('shows', Random.id(), doc);
+      //self.added('shows', Random.id(), doc);
+      //Shows.insert(doc);
+        Shows.upsert({
+          show_id: doc.show_id},
+          {
+            $setOnInsert: {
+            thumb: doc.thumb,
+            title: doc.title,
+            show_id: doc.show_id,
+            //link: doc.id + encodeURI(title),
+            snippet: doc.snippet
+          },
+      });
     });
 
 
@@ -79,7 +110,11 @@ Meteor.publish('titles', function(title) {
   } catch(error) {
     console.log(error);
   }
+<<<<<<< HEAD
   //return Shows.find({title: query});
+=======
+  return Shows.find();
+>>>>>>> instagram
 });
 
 /*Meteor.methods({

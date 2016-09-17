@@ -13,20 +13,17 @@ Meteor.startup(function() {
   );
   */
 
-  // Add GitHub configuration entry
-  /*
+   //Add Instagram configuration entry
   ServiceConfiguration.configurations.update(
-    { service: "github" },
-    { $set: {
-        clientId: "XXXXXXXXXXXXXXXXXXXX",
-        secret: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+    { "service": "instagram" },
+    {
+      $set: {
+        clientId: "d4c9967d893c437581c31ff994800e5a",
+        secret: "24f14d560f97491b8f867e193172629b"
       }
     },
     { upsert: true }
   );
-  */
-
-
 
   ServiceConfiguration.configurations.update(
       { "service": "facebook" },
@@ -40,9 +37,8 @@ Meteor.startup(function() {
     );
 
   // Add Linkedin configuration entry
-  /*
   ServiceConfiguration.configurations.update(
-    { service: "linkedin" },
+    { "service": "linkedin" },
     { $set: {
         clientId: "XXXXXXXXXXXXXX",
         secret: "XXXXXXXXXXXXXXXX"
@@ -50,5 +46,4 @@ Meteor.startup(function() {
     },
     { upsert: true }
   );
-  */
 });

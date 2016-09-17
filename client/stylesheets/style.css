@@ -73,19 +73,7 @@ h4 {
 }
 
 
-.header {
-	background: url('/imgs/binge-tracker-header.jpg');
-	background-repeat:no-repeat;
-	display:block;
-	margin:0px auto;
-	color: #2f3c4e;
-	text-transform: uppercase;
-	height: 367px;
-	position: absolute;
-	padding-bottom:10px;
-	width: 100%;
 
-}
 .header .logo {
 	font-size: 36px;
 	font-weight: 700;
@@ -511,7 +499,7 @@ footer h4 {
 
 header {
 	height:367px;
-	background: url('/imgs/binge-tracker-header.jpg');
+	/*background: url('/imgs/binge-tracker-header.jpg');*/
 	background-position:top center;
 	background-repeat:no-repeat;
 	margin:0 0 0px 0;
@@ -623,6 +611,10 @@ header {
 }
 
 .showResult {
-	display: none;
+	display:none;
 	color:red;
+}
+
+.form-control {
+	width:300px;
 }
