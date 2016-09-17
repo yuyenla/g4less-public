@@ -1,2 +1,2 @@
-/imports/api/instagram/server/publications/all_insta.js
-/imports/api/shows/server/publications/all_shows.js
+api/instagram/server/publications/all_insta.js
+api/shows/server/publications/all_shows.js
