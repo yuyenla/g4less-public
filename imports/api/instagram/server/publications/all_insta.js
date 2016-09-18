@@ -15,37 +15,40 @@ Meteor.publish('insta', function() {
 //https://api.instagram.com/v1/users/52511929/media/recent/?access_token=52511929.d4c9967.f9c106ae0abd4794af7752196df83195 this works to grab my in
 //var response = HTTP.get('https://api.instagram.com/v1/users/52511929/media/recent/?access_token=52511929.d4c9967.f9c106ae0abd4794af7752196df83195', { this works for grabbing the content i posted!
 //HTTP.get('https://api.instagram.com/v1/tags/search?q=snowy&access_token=52511929.d4c9967.f9c106ae0abd4794af7752196df83195', { this works for grabbing snowy from search
+
+// https://api.instagram.com/v1/tags/try/media/recent?access_token=52511929.d4c9967.f9c106ae0abd4794af7752196df83195 use this to grab all pictures that i tag with: try
   try {
 
-    var response = HTTP.get('https://api.instagram.com/v1/tags/try/media/recent?access_token=52511929.d4c9967.f9c106ae0abd4794af7752196df83195', {
+    var response = HTTP.get('https://api.instagram.com/v1/users/52511929/media/recent/?access_token=52511929.d4c9967.f9c106ae0abd4794af7752196df83195', {
     });
 
-    console.log("INSTAGRAM RESPONSE", response.data.data[0]);
+    //console.log("INSTAGRAM RESPONSE", response.data.data[0]);
 
 
-//     _.each(response.data.data, function(item) {
-//       var doc = {
-//         image: item.images.low_resolution.url,
-//         caption: item.caption.text,
-//         userName: item.user.username,
-//         user_id: item.user.id,
-//         image_id: item.id
-//
-//       };
-// console.log(doc);
-//       Insta.upsert({
-//         _id: doc.image_id},
-//         {
-//           $setOnInsert: {
-//             image: doc.image,
-//             caption: doc.caption,
-//             userName: doc.userName,
-//             user_id: doc.user_id,
-//             image_id: doc.image_id
-//           },
-//       });
+    _.each(response.data.data, function(item) {
+      var doc = {
+        image: item.images.low_resolution.url,
+        caption: item.caption.text,
+        userName: item.user.username,
+        user_id: item.user.id,
+        image_id: item.id
+      };
+
     //  console.log(doc);
-    //});
+
+      Insta.upsert({
+        _id: doc.image_id},
+        {
+          $setOnInsert: {
+            image: doc.image,
+            caption: doc.caption,
+            userName: doc.userName,
+            user_id: doc.user_id,
+            image_id: doc.image_id
+          },
+      });
+
+    });
 
 
   } catch(error) {

@@ -14,6 +14,16 @@ Meteor.startup(function() {
   */
 
    //Add Instagram configuration entry
+//    ServiceConfiguration.configurations.remove({
+//   service: 'instagram'
+//   });
+//
+//   ServiceConfiguration.configurations.insert({
+//   service: 'instagram',
+//   scope: ['basic'],
+//   clientId: 'd4c9967d893c437581c31ff994800e5a',
+//   secret: '24f14d560f97491b8f867e193172629b'
+// });
   ServiceConfiguration.configurations.update(
     { "service": "instagram" },
     {
@@ -36,7 +46,7 @@ Meteor.startup(function() {
       { upsert: true }
     );
 
-  // Add Linkedin configuration entry
+  //Add Linkedin configuration entry
   ServiceConfiguration.configurations.update(
     { "service": "linkedin" },
     { $set: {

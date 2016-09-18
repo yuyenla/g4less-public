@@ -618,3 +618,8 @@ header {
 .form-control {
 	width:300px;
 }
+
+#search-select {
+	index-z: 1;
+	position: absolute;
+}

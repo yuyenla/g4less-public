@@ -3,75 +3,26 @@ import { Mongo } from 'meteor/mongo';
 import {Shows} from '/imports/api/shows/shows.js';
 
 
-<<<<<<< HEAD
-Meteor.publish('showReturn', function(show){
-  console.log("show on server side", show);
-  var self = this;
-  try {
-    var response = HTTP.get('http://api.themoviedb.org/3/search/tv?query=' + encodeURI(show) + '&api_key=750bf13867ffdeadf92768f357cea8c0&page=1', {
-    });
-
-  //  var id = response.data.results[0].id;
-
-  _.each(response.data.results, function(item) {
-    var doc = {
-      thumb: item.poster_path,
-      title: item.name,
-      show_id: item.id,
-      link: item.id + encodeURI(show),
-      snippet: item.overview,
-      category: show
-    };
-  //  console.log("doc", doc);
-      self.added('shows', Random.id(), doc);
-      // var showId = Shows.insert(doc);
-      // Session.set('showId',showId);
-    });
-
-
-
-    self.ready();
-=======
 Meteor.publish('showReturn', function(showTitle){
-  console.log("Here is the showID: ", showTitle)
-  console.log("publications", Shows.findOne({title:showTitle}));
+  //console.log("Here is the showID: ", showTitle)
+  //console.log("publications", Shows.findOne({title:showTitle}));
   return Shows.find({title:showTitle});
 });
->>>>>>> instagram
-
-  } catch(error) {
-    console.log(error);
-  }
-
-});
 
 
-Meteor.publish('titles', function(title) {
-  console.log("title on server side", title);
+Meteor.publish('shows', function(query) {
+  console.log("query on server side", query);
   var self = this;
   try {
-    var response = HTTP.get('http://api.themoviedb.org/3/search/tv?query=' + encodeURI(title) + '&api_key=750bf13867ffdeadf92768f357cea8c0&page=1', {
+    var response = HTTP.get('http://api.themoviedb.org/3/search/tv?query=' + encodeURI(query) + '&api_key=750bf13867ffdeadf92768f357cea8c0&page=1', {
     });
 
     //var id = response.data.results[0].id;
-    //console.log("RESPONSE", response.data);
+  //  console.log("response", response);
 
 
     _.each(response.data.results, function(item) {
       var doc = {
-<<<<<<< HEAD
-      //  thumb: item.poster_path,
-        title: item.name,
-        category: title,
-        show_id: item.id
-      //  link: item.id + encodeURI(query),
-      //  snippet: item.overview
-      };
-
-
-
-      //console.log("doc: ", doc);
-=======
         thumb: item.poster_path,
         title: item.name,
         show_id: item.id,
@@ -79,15 +30,14 @@ Meteor.publish('titles', function(title) {
         snippet: item.overview
       };
 
-      //console.log("doc: ", doc.title);
->>>>>>> instagram
+      console.log("doc: ", doc.title);
       //upsert = update or insert
-      // var shows = Shows.findOne({title: item.name});
-      // //console.log("shows",shows);
-      // if(!shows){
-      //   Shows.insert({title: item.name});
-      //   console.log("Shows.insert", item.name);
-      // }
+    /*  var shows = Shows.findOne({title: item.name});
+      console.log("shows",shows);
+      if(!shows){
+        Shows.insert({title: item.name});
+        console.log("Shows.insert", item.name);
+      }*/
 
       //self.added('shows', Random.id(), doc);
       //Shows.insert(doc);
@@ -105,16 +55,12 @@ Meteor.publish('titles', function(title) {
     });
 
 
-    self.ready();
+    //self.ready();
 
   } catch(error) {
     console.log(error);
   }
-<<<<<<< HEAD
-  //return Shows.find({title: query});
-=======
   return Shows.find();
->>>>>>> instagram
 });
 
 /*Meteor.methods({
@@ -129,16 +75,12 @@ Meteor.publish('titles', function(title) {
     }
       //console.log("OVERVIEW: ", response.data.results[0].overview);
       _.each(response.data.items, function(item) {
-
         var doc = {
           thumb:response.data.results[0].poster_path,
           title:response.data.results[0].name,
           overview:response.data.results[0].overview,
         };
-
       });
-
-
     } catch(error) {
       console.log(error);
     }
