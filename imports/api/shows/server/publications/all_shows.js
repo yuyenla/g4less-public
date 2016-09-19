@@ -3,10 +3,10 @@ import { Mongo } from 'meteor/mongo';
 import {Shows} from '/imports/api/shows/shows.js';
 
 
-Meteor.publish('showReturn', function(showTitle){
-  //console.log("Here is the showID: ", showTitle)
-  //console.log("publications", Shows.findOne({title:showTitle}));
-  return Shows.find({title:showTitle});
+Meteor.publish('showReturn', function(id){
+  console.log("Here is the showID: ", id);
+  //console.log("publications", Shows.find({title:"Supernatural"}));
+  return Shows.find({show_id:id});
 });
 
 
@@ -41,13 +41,19 @@ Meteor.publish('shows', function(query) {
 
       //self.added('shows', Random.id(), doc);
       //Shows.insert(doc);
+
+      var showId = doc.show_id;
+      console.log("type of showId: ", typeof(showId));
+      var idToString = doc.show_id.toString();
+      console.log("type of showId now: ", typeof(idToString));
+
         Shows.upsert({
-          show_id: doc.show_id},
+          show_id: idToString},
           {
             $setOnInsert: {
             thumb: doc.thumb,
             title: doc.title,
-            show_id: doc.show_id,
+            show_id: idToString,
             //link: doc.id + encodeURI(title),
             snippet: doc.snippet
           },

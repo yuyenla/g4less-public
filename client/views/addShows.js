@@ -16,8 +16,8 @@ Tracker.autorun(function() {
     var searchHandle = Meteor.subscribe('shows', Session.get('query'));
     Session.set('searching', !searchHandle.ready());
   }
-  if (typeof(Session.get('title')) != "undefined") {
-    var searchHandle = Meteor.subscribe('showReturn', Session.get('title'));
+  if (typeof(Session.get('showId')) != "undefined") {
+    var searchHandle = Meteor.subscribe('showReturn', Session.get('showId'));
     Session.set('searching', !searchHandle.ready());
   }
 });
@@ -29,31 +29,12 @@ Template.addShows.onRendered(function(){
 });
 
 Template.addShows.events({
-  'submit form': function(event, template) {
-    event.preventDefault();
-    var queryId = $('#showid').attr("class");
-    console.log("queryId", queryId);
-     if (queryId){
-       Session.set('queryId', queryId);
-       $('.showResult').show();
-     }
-  },
-  // 'keydown .form-control' : function(event,template) {
-  //   var query = template.$('input[type=text]').val();
-  //   console.log("keydown",query);
-  //   if(query.length >= 3){
-  //     setTimeout(function() {
-  //       //console.log("query length", query.length);
-  //       Session.set('query', query);
-  //     }, 1000);
-  //
-  //   }
-  // },
-
   'click .item' : function(event, template) {
+    id = $('.selected').attr('id');
     showTitle = $('.selected').attr('data-value');
     Session.set('title', showTitle);
-    console.log("i clicked on:", Session.get('title'));
+    Session.set('showId', id);
+    console.log("i clicked on:", Session.get('showId'));
 
   },
   //you need to pass in the event target! as long as it's keyup, then it can tell.
@@ -67,30 +48,11 @@ Template.addShows.events({
       }, 1000);
 
     }
-  },
-  //
-  // 'click .search': function(event,template) {
-  //   event.preventDefault();
-  //   $('.search').attr("type","text");
-  //   $('.search').removeClass("search").addClass("form-control");
-  //   var query = template.$('input[type=text]').val();
-  //   console.log("yooo LOL", query);
-  //
-  // },
-
-  // 'keydown .search': function(event,template){
-  //   event.preventDefault();
-  //   if($('.search').hasAttribute("type")){
-  //     console.log("yup it has type");
-  //   }
-  // }
-
+  }
 });
 
 Template.addShows.helpers({
   shows: function() {
-    console.log("i made it here");
-    console.log("show title",showTitle);
     return Shows.find();
   },
   searching: function() {
@@ -101,8 +63,10 @@ Template.addShows.helpers({
 Template.foundShows.helpers({
   show: function() {
     console.log("i made it here");
-    console.log("show title",showTitle);
-    return Shows.find({title: Session.get('title')});
+    console.log("show id!!!",Session.get('showId'));
+    console.log("fetch", Shows.find({show_id: 37680}).fetch());
+    console.log("session type", typeof(Session.get('showId')));
+    return Shows.find({show_id: Session.get('showId')});
   },
 });
 
@@ -113,15 +77,12 @@ Template.addShows.events({
   'submit .form-horizontal'(event) {
     // Prevent default browser form submit
     event.preventDefault();
-
     var query = $('input[type=text]').val();
     console.log("getting the value of query on client side ", query)
-
     Meteor.call("getShowsAPI", query, function(error, result){
       if(error){
         console.log("error", error);
       }
-
       if(result){
         console.log("result", result);
       }
@@ -132,16 +93,12 @@ Template.addShows.events({
     const showName = $('#title').val();
     const season=$('#season').val();
     const episode=$('#episode').val();
-
     console.log("title: ", showName);
     console.log("season: ", season);
     console.log("episode: ", episode);
-
-
     var info = {'title' : showName,
                 'season' : season,
                 'episode' : episode,};
-
     Meteor.call('shows.insert', info, function(error, result) {
       console.log(result);
       if( result == true)
@@ -149,7 +106,5 @@ Template.addShows.events({
         $('.message').show();
       }
     });
-
-
   },*/
 //});
