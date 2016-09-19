@@ -15,7 +15,7 @@ Tracker.autorun(function() {
      hope = '';
    }
    console.log("hope!", hope);
-   var str = hope.replace(" ", "");
+   var str = hope.replace(/ /g,'');
    console.log("hopefully this gets back the title searched?", str);
    var lowerCase = str.toLowerCase();
    console.log("lowercase", lowerCase);

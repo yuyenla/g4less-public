@@ -5,3 +5,5 @@ import '/imports/api/shows/shows.js';
 import '/imports/api/shows/server/publications/all_shows.js';
 import '/imports/api/instagram/instagramCollection.js';
 import '/imports/api/instagram/server/publications/all_insta.js';
+import '/imports/api/twitter/twitterCollection.js';
+import '/imports/api/twitter/server/publications/all_twitter.js';

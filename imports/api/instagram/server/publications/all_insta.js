@@ -4,10 +4,13 @@ import { Insta } from '/imports/api/instagram/instagramCollection.js';
 
 
 Meteor.publish('insta', function(tag) {
-  console.log("Hi I am here from the instagram publication");
-  console.log("title without the spaces", tag);
-  var hashTag = "#" + tag;
-  console.log("hashtag", hashTag);
+  if(tag != "undefined"){
+    console.log("Hi I am here from the instagram publication");
+    console.log("title without the spaces", tag);
+    var hashTag = "#" + tag;
+    console.log("hashtag", hashTag);  
+  }
+
 
 
 
