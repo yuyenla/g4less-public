@@ -53,6 +53,19 @@ FlowRouter.route('/instagram', {
   }
 });
 
+FlowRouter.route('/twitter', {
+  name: "twitter",
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  action: function(params, queryParams) {
+    BlazeLayout.render('masterLayout', {
+      footer: "footer",
+      main: "instagram",
+      nav: "nav",
+      //header: "header",
+    });
+  }
+});
+
 FlowRouter.route('/my_shows', {
   name: "myShows",
   triggersEnter: [AccountsTemplates.ensureSignedIn],
