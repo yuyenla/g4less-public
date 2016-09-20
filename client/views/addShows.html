@@ -4,9 +4,6 @@
       <div class="text-center">
         <h1>add shows</h1>
 
-
-
-
         <div class="ui fluid search selection dropdown">
          <input type="hidden" name="shows" id="searchInput">
          <div class="default text">Please enter a title to search by</div>
@@ -16,8 +13,13 @@
             {{/each}}
             </div>
         </div>
-        
+
+        <!-- returns the found show -->
         {{> foundShows}}
+
+        <!-- returns instagram posts that are tagged with the same title -->
+        <h2>instagram posts</h2>
+        {{> instagram}}
 
      </div> <!--text center -->
    </div> <!-- addShows-container-->
@@ -36,7 +38,6 @@
                 </table>
               {{/if}}
           {{/if}}
-
           <div class="form-group">
             <label class="control-label col-sm-2" for="season">Season:</label>
               <div class="col-sm-10">
@@ -49,7 +50,6 @@
                 </select>
               </div>
           </div>
-
           <div class="form-group">
             <label class="control-label col-sm-2" for="season">Episode:</label>
               <div class="col-sm-10">
@@ -70,7 +70,6 @@
       </div>
     </div>
   </form>
-
     <div class="message">
       Success!
     </div>
@@ -84,7 +83,7 @@
   <thead>
     <tr>
       <th>
-        <a href="https://www.themoviedb.org/tv/{{show.link}}" target="_blank">{{title}}</a>
+        <a href="https://www.themoviedb.org/tv/{{link}}" target="_blank">{{title}}</a>
       </th>
     </tr>
     <tr>
@@ -99,5 +98,5 @@
 
 <template name="title">
   <!-- <option id="showid" class="{{show_id}}" value="{{title}}" data-value="{{title}}"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{thumb}}" height="50" width="40">{{title}}</option> -->
-  <div class="item" data-value="{{title}}"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{thumb}}" height="50" width="40">{{title}}</div>
+  <div class="item" data-value="{{title}}" id="{{show_id}}"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{thumb}}" height="50" width="40">{{title}}</div>
 </template>

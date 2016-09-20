@@ -3,8 +3,15 @@ import { Mongo } from 'meteor/mongo';
 import { Insta } from '/imports/api/instagram/instagramCollection.js';
 
 
-Meteor.publish('insta', function() {
-  console.log("Hi I am here from the instagram publication");
+Meteor.publish('insta', function(tag) {
+  if(tag != "undefined"){
+    var hashTag = "#" + tag;
+  }
+  else {
+      var hashTag = '';
+  }
+
+
 
 
 
@@ -17,9 +24,10 @@ Meteor.publish('insta', function() {
 //HTTP.get('https://api.instagram.com/v1/tags/search?q=snowy&access_token=52511929.d4c9967.f9c106ae0abd4794af7752196df83195', { this works for grabbing snowy from search
 
 // https://api.instagram.com/v1/tags/try/media/recent?access_token=52511929.d4c9967.f9c106ae0abd4794af7752196df83195 use this to grab all pictures that i tag with: try
+// https://api.instagram.com/v1/tags/starwarsrebels/media/recent?access_token=3947388902.f0bd8a7.1c842ad33b0f469aa3bb42d0857592df
   try {
 
-    var response = HTTP.get('https://api.instagram.com/v1/users/52511929/media/recent/?access_token=52511929.d4c9967.f9c106ae0abd4794af7752196df83195', {
+    var response = HTTP.get('https://api.instagram.com/v1/tags/' + tag + '/media/recent?access_token=3947388902.f0bd8a7.1c842ad33b0f469aa3bb42d0857592df', {
     });
 
     //console.log("INSTAGRAM RESPONSE", response.data.data[0]);
@@ -27,7 +35,7 @@ Meteor.publish('insta', function() {
 
     _.each(response.data.data, function(item) {
       var doc = {
-        image: item.images.low_resolution.url,
+        image: item.images.thumbnail.url,
         caption: item.caption.text,
         userName: item.user.username,
         user_id: item.user.id,
@@ -54,5 +62,5 @@ Meteor.publish('insta', function() {
   } catch(error) {
     console.log(error);
   }
-  return Insta.find();
+  return Insta.find({caption:hashTag});
 });
