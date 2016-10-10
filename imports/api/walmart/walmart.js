@@ -2,4 +2,4 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
 
-export const Shows = new Mongo.Collection('shows');
+export const Walmart = new Mongo.Collection('walmart');

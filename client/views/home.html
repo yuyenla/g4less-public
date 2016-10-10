@@ -1,12 +1,134 @@
 <template name="home">
-  <div id="prompt">
-    <div class="prompt-container">
-      <div class="text-center">
-        <h1>Welcome</h1>
-        <p>Hi {{currentUser.profile.user_name}} {{currentUser.profile.name}}, Binge Tracker is a social app that you and your friends can connect to with Facebook and keep track of the shows you're currently bingeing on.
-          It's an interactive app that pulls TV show information from the IMDB API so that it can provide the latest information on TV shows.
-        </p>
+  <div class="welcome">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-sm-12 col-md-12 col-lg-12 center-col">
+          <div class="card">
+            <span class="tag">Hey there {{currentUser.profile.name}}</span>
+            <p>
+              Welcome to <strong>Groceries4Less</strong>, a webapp with one goal in mind: to help you save money on your journey to better health.
+            </p>
+            <p>
+              We provide the cheapest prices on the food you want by connecting to multiple APIs and giving you the results in one convenient location so that you don't have to.
+              All you need to do is simply create an account, start searching, and start <strong>saving</strong>.
+            </p>
+            <p>So what are you waiting for?</p>
+
+            <div class="profile-links">
+                <a href="{{pathFor 'sign-up'}}" class="btn btn-default">Sign up today!</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  {{> currentDeals}}
+</template>
+
+<template name="currentDeals">
+<div class="deals-bg">
+  <div class="container">
+    <div class="row">
+
+        <h1>Current Deals</h1>
+
+      <div class="col-sm-4">
+        <div class="card-deal">
+          <span class="tag-brand">Walmart</span>
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <img src="/imgs/apples.jpg" alt="Chania">
+              </div>
+
+              <div class="item">
+                <img src="/imgs/jasminericebag.jpg" alt="Chania">
+              </div>
+
+              <div class="item">
+                <img src="/imgs/icecream.jpg" alt="Flower">
+              </div>
+
+              <div class="item">
+                <img src="/imgs/juice.jpg" alt="Flower">
+              </div>
+            </div> <!--carousel inner-->
+
+            <div class="carousel-price">
+              Now: $3.99
+            </div>
+
+          </div> <!--mycarousel-->
+        </div> <!-- end card -->
+      </div> <!-- bootstrap col -->
+
+      <div class="col-sm-4">
+        <div class="card-deal">
+          <span class="tag-brand">Trader Joes</span>
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <img src="/imgs/corn.jpg" alt="Chania">
+              </div>
+
+              <div class="item">
+                <img src="/imgs/roastchicken.jpg" alt="Chania">
+              </div>
+
+              <div class="item">
+                <img src="/imgs/carrots.jpg" alt="Flower">
+              </div>
+
+              <div class="item">
+                <img src="/imgs/hotpockets.jpg" alt="Flower">
+              </div>
+            </div> <!--carousel inner-->
+
+            <div class="carousel-price">
+              Now: $3.99
+            </div>
+
+          </div> <!--mycarousel-->
+        </div> <!-- end card -->
+      </div> <!-- bootstrap col -->
+
+      <div class="col-sm-4">
+        <div class="card-deal">
+          <span class="tag-brand">Target</span>
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <img src="/imgs/juice.jpg" alt="Chania">
+              </div>
+
+              <div class="item">
+                <img src="/imgs/apples.jpg" alt="Chania">
+              </div>
+
+              <div class="item">
+                <img src="/imgs/icecream.jpg" alt="Flower">
+              </div>
+
+              <div class="item">
+                <img src="/imgs/juice.jpg" alt="Flower">
+              </div>
+
+
+          </div><!--carousel inner-->
+
+          <div class="carousel-price">
+            Now: $3.99
+          </div>
+
+          </div> <!--mycarousel-->
+        </div> <!-- end card -->
+      </div> <!-- bootstrap col -->
+
+  </div> <!--end row-->
+</div><!--end container -->
+</div><!--end bg image -->
 </template>

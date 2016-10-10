@@ -14,70 +14,33 @@ FlowRouter.route('/', {
   }
 });
 
-FlowRouter.route('/private', {
-  name: "private",
+FlowRouter.route('/search', {
+  name: "search",
   triggersEnter: [AccountsTemplates.ensureSignedIn],
   action: function(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
-      main: "private",
+      main: "search",
       nav: "nav",
       //header: "header",
     });
   }
 });
 
-FlowRouter.route('/addShows', {
-  name: "addShows",
+FlowRouter.route('/my-list', {
+  name: "my-list",
   triggersEnter: [AccountsTemplates.ensureSignedIn],
   action: function(params, queryParams) {
     BlazeLayout.render('masterLayout', {
       footer: "footer",
-      main: "addShows",
+      main: "my-list",
       nav: "nav",
       //header: "header",
     });
   }
 });
 
-FlowRouter.route('/instagram', {
-  name: "instagram",
-  triggersEnter: [AccountsTemplates.ensureSignedIn],
-  action: function(params, queryParams) {
-    BlazeLayout.render('masterLayout', {
-      footer: "footer",
-      main: "instagram",
-      nav: "nav",
-      //header: "header",
-    });
-  }
-});
 
-FlowRouter.route('/twitter', {
-  name: "twitter",
-  triggersEnter: [AccountsTemplates.ensureSignedIn],
-  action: function(params, queryParams) {
-    BlazeLayout.render('masterLayout', {
-      footer: "footer",
-      main: "instagram",
-      nav: "nav",
-      //header: "header",
-    });
-  }
-});
-
-FlowRouter.route('/my_shows', {
-  name: "myShows",
-  triggersEnter: [AccountsTemplates.ensureSignedIn],
-  action: function(params, queryParams) {
-    BlazeLayout.render('masterLayout', {
-      footer: "footer",
-      main: "myShows",
-      nav: "nav",
-      //header: "header",
-    });
-  }
-});
 
 FlowRouter.notFound = {
   action: function() {
