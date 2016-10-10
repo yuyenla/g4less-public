@@ -4,18 +4,53 @@
       <div class="row text-center">
         <div class="col-sm-12 col-md-12 col-lg-12 center-col">
           <div class="card">
-            <span class="tag">Hey there {{currentUser.profile.name}}</span>
+            <span class="tag">Let's get searching</span>
             <p>
-              Let's start building your grocery list!
+              <h1>Let's start building your grocery list!</h1>
             </p>
 
-
-            <div class="profile-links">
-                <a href="{{pathFor 'sign-up'}}" class="btn btn-default">Sign up today!</a>
+            <div class="ui fluid search selection dropdown">
+             <input type="hidden" name="food" id="searchInput">
+             <div class="default text">Please enter a food to search by</div>
+              <div class="menu">
+                {{#each food}}
+                  {{>item}}
+                {{/each}}
+                </div>
             </div>
+
+        <!-- returns the found show -->
+        {{> foundFood}}
+
+
           </div>
         </div>
       </div>
     </div>
   </div>
+</template>
+
+
+<template name="foundFood">
+  <h2>Item Selected</h2>
+  {{#each foodItem}}
+  <thead>
+    <tr>
+      <th>
+        <a href="{{product_url}}" target="_blank">{{name}}</a>
+        customer rating: {{customer_review}}
+      </th>
+    </tr>
+    <tr>
+      <td class="image"><img src="{{image}}"></td>
+      <td>
+        <p>{{description}}</p>
+      </td>
+    </tr>
+  </thead>
+  {{/each}}
+</template>
+
+<template name="item">
+  <div class="item" data-value="{{name}}" id="{{item_id}}"><img src="{{image}}" height="50" width="40">{{name}}</div>
 </template>
