@@ -1,7 +1,7 @@
 # g4less
 
-If this is the first time you're running the project,
-please follow these steps:
+**If this is the first time you're running the project,
+please follow these steps:**
 
 **Make sure you've installed meteor and git!**
 
@@ -23,7 +23,7 @@ please follow these steps:
 Now, you should see a bunch of stuff happening on your terminal. You'll know it's ready when it says something like "project is running at
 http://localhost:3000"
 
-If you've already done all of the above steps and you want to start messing with the project, please follow these steps:
+**If you've already done all of the above steps and you want to start messing with the project, please follow these steps:**
 1. If the project is already running, and you're using linux, use the command "ctrl + shift+ t" to open new tab in the terminal.
 
 2. go to that new tab
@@ -34,7 +34,7 @@ If you've already done all of the above steps and you want to start messing with
 
 5. if you made any changes that you think are beneficial to the project, remember to submit a pull request!
 
-How to submit a pull request:
+**How to submit a pull request:**
 1. run the command: git status
 
 2. make sure you're on the branch you specified. DO NOT make any changes to the branch "master"
@@ -45,7 +45,7 @@ How to submit a pull request:
 
 6. run the command: git commit -m "my message here"
 
-7. run the command: git push origin branch-name (please, DO NOT push to master!)
+7. run the command: git push origin <branchname> (please, DO NOT push to master!)
 
 8. go onto github and click on this repository, and then click on "branches" you should be able to see the latest branch you commited.
 
