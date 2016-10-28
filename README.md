@@ -5,7 +5,7 @@ This is a grocery item finder that performs returns food items from various groc
 This is written in Meteor/Blaze and implements OAUth 2.0 so that users can login through their Facebook or Instagram accounts.
 
 Features to come: 
-1. Generate recipes based on user's grocery list.
-2. Allow users to create a group grocery list with other members
+* Generate recipes based on user's grocery list.
+* Allow users to create a group grocery list with other members
 
 
