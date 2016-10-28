@@ -4,3 +4,4 @@ node_modules/
 *DS_Store
 .meteor/local
 /imports/api/walmart/server/publications/all_walmart.js
+/server/lib/config/accounts.js
